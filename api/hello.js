@@ -1,5 +1,6 @@
 module.exports = (req, res) => {
-  const { message = {} } = req.body;
+  const { body = {}} = req;
+  const { message = {} } = body;
   const { chat = {} } = message;
   res.json({
     body: {
