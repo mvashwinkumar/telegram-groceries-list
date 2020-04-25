@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
-  console.log('req', req);
   const { body = {}} = req;
+  console.log('req.body', body);
   const { message = {} } = body;
   const { chat = {} } = message;
   res.json({
