@@ -1,11 +1,26 @@
+const axios = require("axios");
+
+let telegram_url = "https://api.telegram.org/bot" + process.env.TELEGRAM_API_TOKEN +"/sendMessage";
+
+const sendMessage = (message, reply, res) => {
+  const { chat = {} } = message;
+    axios.post(telegram_url, {
+        chat_id: message.chat.id,
+        text: reply
+    }).then(response => {
+        console.log("Message posted", response);
+        res.end("ok");
+    }).catch(error =>{
+        console.log(error);
+        res.end(error);
+    });
+};
+
 module.exports = (req, res) => {
   const { body = {}} = req;
   console.log('req.body', body);
-  console.log('process.env', process.env);
   const { message = {} } = body;
-  const { chat = {} } = message;
-  res.json({
-        chat_id: chat.id,
-        text: "Hello world!!!"
-  })
+  let reply = "Welcome to telegram grocery items list bot";
+    console.log('message', message);
+    sendMessage(message,reply,res);
 }
