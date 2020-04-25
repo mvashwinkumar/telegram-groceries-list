@@ -7,8 +7,7 @@ const sendMessage = (message, reply, res) => {
     axios.post(telegram_url, {
         chat_id: message.chat.id,
         text: reply
-    }).then(response => {
-        console.log("Message posted", response);
+    }).then(() => {
         res.end("ok");
     }).catch(error =>{
         console.log(error);
@@ -21,6 +20,5 @@ module.exports = (req, res) => {
   console.log('req.body', body);
   const { message = {} } = body;
   let reply = "Welcome to telegram grocery items list bot";
-    console.log('message', message);
-    sendMessage(message,reply,res);
+  sendMessage(message,reply,res);
 }
