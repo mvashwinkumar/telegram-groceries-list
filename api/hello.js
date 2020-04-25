@@ -16,8 +16,9 @@ const sendMessage = (message, reply, res) => {
 };
 
 module.exports = (req, res) => {
-  const { body = {}} = req;
-  console.log('req.body', body);
+  const { body = {}, query = {} } = req;
+  console.log('req.query', JSON.stringify(query, null, 2));
+  console.log('req.body', JSON.stringify(body, null, 2));
   const { message = {} } = body;
   let reply = "Welcome to telegram grocery items list bot";
   sendMessage(message,reply,res);
